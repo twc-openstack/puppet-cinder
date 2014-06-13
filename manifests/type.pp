@@ -52,7 +52,7 @@ define cinder::type (
   ]
 
   if $os_region_name {
-    $cinder_env += "OS_REGION_NAME=${os_region_name}"
+    $cinder_env += ["OS_REGION_NAME=${os_region_name}"]
   }
 
   exec {"cinder type-create ${volume_name}":
