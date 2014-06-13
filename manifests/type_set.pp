@@ -49,16 +49,13 @@ define cinder::type_set (
   ]
 
   if $os_region_name {
-    $region_env = "OS_REGION_NAME=${os_region_name}"
-  }
-  else {
-    $region_env = {}
+    $cinder_env += "OS_REGION_NAME=${os_region_name}"
   }
 
   exec {"cinder type-key ${type} set ${key}=${name}":
     path        => '/usr/bin',
     command     => "cinder type-key ${type} set ${key}=${name}",
-    environment => merge($cinder_env, $region_env),
+    environment => $cinder_env,
     require     => Package['python-cinderclient']
   }
 }
