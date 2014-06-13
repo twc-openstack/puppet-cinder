@@ -52,13 +52,16 @@ define cinder::type (
   ]
 
   if $os_region_name {
-    $cinder_env += ["OS_REGION_NAME=${os_region_name}"]
+    $region_env = ["OS_REGION_NAME=${os_region_name}"]
+  }
+  else {
+    $region_env = []
   }
 
   exec {"cinder type-create ${volume_name}":
     command     => "cinder type-create ${volume_name}",
     unless      => "cinder type-list | grep ${volume_name}",
-    environment => $cinder_env,
+    environment => $cinder_env + $region_env,
     require     => Package['python-cinderclient']
   }
 
