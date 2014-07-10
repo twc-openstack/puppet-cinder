@@ -88,7 +88,7 @@ class cinder (
   $database_connection         = 'sqlite:////var/lib/cinder/cinder.sqlite',
   $database_idle_timeout       = '3600',
   $rpc_backend                 = 'cinder.openstack.common.rpc.impl_kombu',
-  $control_exchange            = 'openstack',
+  $control_exchange            = 'cinder',
   $rabbit_host                 = '127.0.0.1',
   $rabbit_port                 = 5672,
   $rabbit_hosts                = false,
